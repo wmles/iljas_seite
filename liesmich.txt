@@ -6,4 +6,6 @@ Zum erstellen weiterer Kopien des Projektes andere Vorgehensweise:
  - aktiviere virtualenv: source env_name/bin/activate
  - dann pip install -r requirements.txt
  - per git clone diesen Ordner kopieren
-
+ - python manage.py migrate erzeugt Datenbank
+ - wenn lokale Einstellungen gewuenscht sind:
+   iljas_seite/local_settings.py erzeugen und dort reinschreiben
