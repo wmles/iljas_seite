@@ -1,0 +1,13 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+
+{% block content %}
+<h1> Das ist eine Übersicht über alle Veranstaltungen! </h1>
+
+
+{% for vst in Veranstaltungen %}
+	<li><a href="{% url 'Margarete:Veranstaltung' vst.urlbezeichnung %}">{{ vst.bezeichnung }}</a></li>
+{% endfor %}
+
+<p> tertiam non olet: {% lorem 47 w random %}. <br> {% lorem 81 w random %}. </p>
+
+{% endblock %}

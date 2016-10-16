@@ -1,0 +1,10 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+
+{% block content %}
+<h2> Übersichtsseite der Nutzerverwaltung </h2>
+
+{% for Nutzer in Liste_der_Nutzer %}
+	<li><a href="{% url 'Nutzerverwaltung:Profil' Nutzer.pk %}">{{ Nutzer.username }}</a></li>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite der {{ Wettbewerbsrunde.bezeichnung }} </h1>
+
+
+Zurück zur <a href="{% url 'Margarete:Wettbewerb' Fachbereich.urlbezeichnung Wettbewerb.urlbezeichnung %}">{{ Wettbewerb.bezeichnung }}</a>
+</br>
+{{ Wettbewerbsrunde.beschreibung }}
+</br>
+
+
+{% if Wettbewerbsrunde.konkretewettbewerbsrunde_set.all %}
+Folgende Jahrgänge dieser Wettbewerbsrunde sind verfügbar:
+{% endif %}
+{% for kwr in Wettbewerbsrunde.konkretewettbewerbsrunde_set.all %}
+	<li><a href="{% url 'Margarete:KonkreteWettbewerbsrunde' Fachbereich.urlbezeichnung Wettbewerb.urlbezeichnung Wettbewerbsrunde.runde kwr.nummer %}">{{ kwr.bezeichnung }}</a></li>
+{% endfor %}
+
+{% if Ehrentafel %}
+folgende Teilnehmer waren besonders erfolgreich:
+{% endif %}
+{% for teiln,score in Ehrentafel %}
+	<li><a href="{% url 'Margarete:Profil' teiln.urlbezeichnung %}">{{ teiln.vorname }} {{teiln.nachname }}</a></li>
+{% endfor %}
+
+{% if Wettbewerbsrunde.seminar_set.all %}
+folgende Seminare gehören zur Wettbewerbsrunde:
+{% endif %}
+{% for sem in Wettbewerbsrunde.seminar_set.all %}
+	<li><a href="{% url 'Margarete:Seminar' sem.urlbezeichnung %}">{{ sem.bezeichnung }}</a></li>
+{% endfor %}
+
+{% endblock %}
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

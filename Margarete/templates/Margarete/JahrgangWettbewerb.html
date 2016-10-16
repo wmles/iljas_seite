@@ -1,0 +1,29 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite des {{ Jahrgang }}. des Wettbewerbs {{ Wettbewerb.bezeichnung }} </h1>
+
+{{ Wettbewerb.beschreibung }} --> Zurück zur <a href="{% url 'Margarete:Wettbewerb' Wettbewerb.fachbereich.urlbezeichnung Wettbewerb.urlbezeichnung %}">{{ Wettbewerb.bezeichnung }}</a>
+</br>
+
+{% for runde in KonkreteWettbewerbsrunden %}
+{% if runde.wettbewerbsveranstaltung_set.all %}
+Die {{ runde.bezeichnung }} fand {% with runde.wettbewerbsveranstaltung_set.all|first as everanstaltung %}
+am <a href="{% url 'Margarete:Veranstaltung' everanstaltung.urlbezeichnung %}">{{ everanstaltung.zeitBeginn }} in {{ everanstaltung.ort}}</a>{% for veranstaltung in runde.wettbewerbsveranstaltung_set.all %}{% if veranstaltung != everanstaltung %}und <a href="{% url 'Margarete:Veranstaltung' veranstaltung.urlbezeichnung %}">am {{ veranstaltung.zeitBeginn }} in {{ veranstaltung.ort }}</a>
+{% endif %}
+{% endfor %}
+statt. </br>
+{% endwith %}
+{% endif %}
+{% endfor %}
+
+Folgende Runden dieses Jahrgangs sind verfügbar:
+{% for ru in KonkreteWettbewerbsrunden %}
+	<li><a href="{% url 'Margarete:KonkreteWettbewerbsrunde' Wettbewerb.fachbereich.urlbezeichnung Wettbewerb.urlbezeichnung ru.wettbewerbsrunde.runde Jahrgang %}">{{ ru.bezeichnung }}</a></li>
+{% endfor %}
+
+{% endblock %}
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Hier kannst Du Deine Teilnahme für {{ Veranstaltung.bezeichnung }} eintragen</h1>
+
+{% if error_message %}{{ error_message }}{% endif %}
+
+<form action="{% url 'Margarete:Tsubmit' Veranstaltung.urlbezeichnung %}" method="post">
+{% csrf_token %}
+
+<label>Dein Name:
+	<select name="Person">
+{% for name in Personen %}
+		<option value="{{ name.id }}">{{ name.vorname }} {{ name.nachname }}</option>
+{% endfor %}
+	</select>
+</label>
+</br>
+<label>Deine Teilnahmeart:
+	<select name="Teilnahmeart">
+{% for art in Teilnahmearten %}
+		<option value="{{ art.id }}">{{ art.bezeichnung }}</option>
+{% endfor %}
+	</select>
+</label>
+</br>
+<input type="submit" value="Eintragen">
+</form>
+
+
+{% endblock %}
+
+
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

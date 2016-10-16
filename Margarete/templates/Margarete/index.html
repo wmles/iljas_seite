@@ -1,0 +1,22 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+
+{% block content %}
+<h1> Das ist die Startseite der Wettbewerbsdatenbank! </h1>
+
+<p> als erstes eine Liste der Fachbereiche: </p>
+{% for Fachbereich in Fachbereiche %}
+	<li><a href="{% url 'Margarete:Fachbereich' Fachbereich.urlbezeichnung %}">{{ Fachbereich.bezeichnung }}</a></li>
+{% endfor %}
+<p> und hier die Liste der zuletzt eingetragenen Wettbewerbe: </p>
+{% for W in ListeNeuesterW %}
+	<li><a href="{% url 'Margarete:Wettbewerb' W.fachbereich.urlbezeichnung W.urlbezeichnung %}">{{ W.bezeichnung }}</a></li>
+{% endfor %}
+<p> und hier die Liste der zuletzt eingetragenen Vernatsaltungen: </p>
+{% for W in ListeNeueV %}
+	<li><a href="{% url 'Margarete:Veranstaltung' W.urlbezeichnung %}">{{ W.bezeichnung }}</a></li>
+{% endfor %}
+<p> Und <a href="{% url 'Margarete:Veranstaltungen' %}">hier</a> ist noch eine Übersicht über alle Veranstaltungen </p>
+
+<p> tertiam non olet: {% lorem 47 w random %}. <br> {% lorem 81 w random %}. </p>
+
+{% endblock %}

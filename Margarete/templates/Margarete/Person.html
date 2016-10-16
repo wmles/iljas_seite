@@ -1,0 +1,29 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite von {{ Person.vorname }} {{ Person.nachname}} </h1>
+
+{{ Person.beschreibung }}
+</br>
+
+
+{{ Person.vorname }} {{ Person.nachname}} hat an folgenden Wettbewerben teilgenommen:
+{% for wb in Wettbewerbe %}
+	<li><a href="{% url 'Margarete:Wettbewerb' wb.fachbereich.urlbezeichnung wb.urlbezeichnung %}">{{ wb.bezeichnung }}</a></li>
+{% endfor %}
+
+{{ Person.vorname }} {{ Person.nachname}} hat in folgenden Jahrgängen an folgenden Wettbewerben teilgenommen:
+{% for teilnahme in Teilnahmen %}
+	<li><a href="{% url 'Margarete:Veranstaltung' teilnahme.veranstaltung.urlbezeichnung %}">{{ teilnahme.veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.bezeichnung }}</a>: {{ teilnahme.teilnahmeart.bezeichnung }}</li>
+{% endfor %}
+
+{{ Person.vorname }} {{ Person.nachname}} hat an folgenden anderen Veranstaltungen teilgenommen:
+{% for teilnahme in sTeilnahmen %}
+	<li><a href="{% url 'Margarete:Veranstaltung' teilnahme.veranstaltung.urlbezeichnung %}">{{ teilnahme.veranstaltung.bezeichnung }}</a>: {{ teilnahme.teilnahmeart.bezeichnung }}</li>
+{% endfor %}
+
+{% endblock %}
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

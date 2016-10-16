@@ -1,0 +1,63 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite der {{ Veranstaltung.bezeichnung }} </h1>
+
+{{ Veranstaltung.beschreibung }}
+</br>
+
+Zurück zur <a href="{% url 'Margarete:Veranstaltungen' %}">Übersicht über alle Veranstaltungen</a>
+
+{% if Typ == 1 %}
+</br>
+Zurück zur Übersicht über <a href="{% url 'Margarete:Seminar' Veranstaltung.konkretesseminar.seminar.urlbezeichnung %}">{{ Veranstaltung.konkretesseminar.seminar.bezeichnung }}</a>
+{% endif %}
+
+{% if Typ == 2 %}
+</br>
+Zurück zur Übersicht über den Wettbewerb <a href="{% url 'Margarete:Wettbewerb' Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung %}">{{ Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.bezeichnung }}</a>
+</br>
+Zurück zur Übersicht über den Wettbewerbsjahrgang <a href="{% url 'Margarete:Wettbewerbsjahrgang' Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.nummer %}">{{ Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.nummer }}. {{ Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.bezeichnung }}</a>
+{% if not redirected %}
+</br>
+Zurück zur Übersicht über die konkrete Wettbewerbsrunde <a href="{% url 'Margarete:KonkreteWettbewerbsrunde' Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.wettbewerbsrunde.runde Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.nummer %}">{{ Veranstaltung.wettbewerbsveranstaltung.konkreteWettbewerbsrunde.bezeichnung }}</a>
+{% endif %}
+{% endif %}
+
+
+
+
+</br>
+
+
+{% if Teilnahmeliste %}
+Folgende Personen haben teilgenommen:
+{% for teiln in Teilnahmeliste %}
+	<li><a href="{% url 'Margarete:Profil' teiln.person.urlbezeichnung %}">{{ teiln.person.vorname }} {{teiln.person.nachname }}</a>: {{ teiln.teilnahmeart.bezeichnung }}</li>
+{% endfor %}
+Trage jetzt auch deine Teilnahme für die Veranstaltung in unsere Datenbank ein: 
+{% else %}
+Diese Veranstaltung hat noch keine Teilnehmer. Trage jetzt deine Teilnahme in unsere Datenbank ein:
+{% endif %}
+<a href="{% url 'Margarete:Teintragen' Veranstaltung.urlbezeichnung %}">Hier klicken</a>
+
+{% if Veranstaltung.sonstigeveranstaltung.istNachtreffenVon %}
+</br>Diese Veranstaltung ist ein Nachtreffen von <a href="{% url 'Margarete:Veranstaltung' Veranstaltung.sonstigeveranstaltung.istNachtreffenVon.urlbezeichnung %}">{{ Veranstaltung.sonstigeveranstaltung.istNachtreffenVon.bezeichnung }}</a>
+{% endif %}
+
+{% if Veranstaltung.nachtreffen.all %}
+Es gibt Nachtreffen zu dieser Veranstaltung:
+{% endif %}
+{% for ntr in Veranstaltung.nachtreffen.all %}
+	<li><a href="{% url 'Margarete:Veranstaltung' ntr.urlbezeichnung %}">{{ ntr.bezeichnung }}</a></li>
+{% endfor %}
+
+
+
+{% endblock %}
+
+
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

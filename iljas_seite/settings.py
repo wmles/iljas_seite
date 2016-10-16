@@ -31,7 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Grundgeruest.apps.GrundgeruestConfig',
+    'Nutzerverwaltung.apps.NutzerverwaltungConfig',
+    'Margarete.apps.MargareteConfig',
+    'Notizzettel.apps.NotizzettelConfig',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

@@ -1,0 +1,34 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite der {{ KonkreteWettbewerbsrunde.bezeichnung }} </h1>
+
+{{ KonkreteWettbewerbsrunde.beschreibung }}
+</br>
+
+Zurück zur <a href="{% url 'Margarete:Wettbewerb' KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung %}">{{ KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.bezeichnung }}</a>
+
+</br>
+
+Zurück zur <a href="{% url 'Margarete:Wettbewerbsrunde' KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung KonkreteWettbewerbsrunde.wettbewerbsrunde.runde %}">{{ KonkreteWettbewerbsrunde.wettbewerbsrunde.bezeichnung }}</a>
+
+</br>
+
+Zurück zur <a href="{% url 'Margarete:Wettbewerbsjahrgang' KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.fachbereich.urlbezeichnung KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.urlbezeichnung KonkreteWettbewerbsrunde.nummer %}">{{ KonkreteWettbewerbsrunde.nummer }}. {{ KonkreteWettbewerbsrunde.wettbewerbsrunde.wettbewerb.bezeichnung }}</a>
+
+</br>
+Zu dieser Wettbewerbsrunde fanden folgende Veranstaltungen statt:
+{% for wv in KonkreteWettbewerbsrunde.wettbewerbsveranstaltung_set.all %}
+	<li><a href="{% url 'Margarete:Veranstaltung' wv.urlbezeichnung %}">{{ wv.bezeichnung }}</a></li>
+{% endfor %}
+
+Folgende Personen haben teilgenommen:
+{% for teiln in Teilnahmeliste %}
+	<li><a href="{% url 'Margarete:Profil' teiln.person.urlbezeichnung %}">{{ teiln.person.vorname }} {{teiln.person.nachname }}</a> war {{ teiln.teilnahmeart.bezeichnung }} in {{ teiln.veranstaltung.ort }}</li>
+{% endfor %}
+
+{% endblock %}
+
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}

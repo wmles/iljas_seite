@@ -1,5 +1,5 @@
 """
-WSGI config for IljasSeite project.
+WSGI config for iljas_seite project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

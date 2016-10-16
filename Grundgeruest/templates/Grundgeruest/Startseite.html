@@ -1,0 +1,9 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Startseite </h1>
+
+<a href="{% url 'Margarete:index' %}">Zu den Wettbewerben</a>
+<p>textus randomus, non richtigus latinus:</p>
+{% lorem 7 p %}
+{% endblock %}

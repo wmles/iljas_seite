@@ -1,0 +1,17 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Profil von {{ user.username }} </h1>
+
+{% include "Nutzerverwaltung/Profilkarte.html" %}
+
+<p> Nutzername: {{ user.username }}<br>
+Vorname: {{ user.first_name }}<br>
+Nachname: {{ user.last_name }}<br>
+angemeldet seit {{ user.date_joined }}</p>
+
+{% if request.user == user %}
+  <a href="{% url 'Nutzerverwaltung:MeinPasswortAendern' %}">Mein Passwort ändern</a>
+{% endif %}
+  
+{% endblock %}

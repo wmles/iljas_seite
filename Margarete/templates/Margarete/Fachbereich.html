@@ -1,0 +1,22 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite der {{ Fachbereich.bezeichnung }} </h1>
+
+<p> Beschreibung: {{ Fachbereich.beschreibung }} </p>
+{% lorem 2 p random %}
+
+{% if Fachbereich.wettbewerb_set.all %}
+Es gibt folgende {{ Fachbereich.bezeichnung }}-Wettbewerbe:
+{% endif %}
+{% for w in Fachbereich.wettbewerb_set.all %}
+	<li><a href="{% url 'Margarete:Wettbewerb' Fachbereich.urlbezeichnung w.urlbezeichnung %}">{{ w.bezeichnung }}</a></li>
+{% endfor %}
+
+{% if Seminare %}
+Es gibt folgende Seminare für diesen Fachbereich:
+{% endif %}
+{% for w in Seminare %}
+	<li><a href="{% url 'Margarete:Seminar' w.urlbezeichnung %}">{{ w.bezeichnung }}</a></li>
+{% endfor %}
+{% endblock %}

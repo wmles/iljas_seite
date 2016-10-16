@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<head><meta charset="utf-8"></meta></head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="http://www.w3schools.com/lib/w3.css" />
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-light-green.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<body class="w3-theme-d3">
+{% block alles %}
+<div class="w3-card-4 w3-theme-l1 w3-margin-16 w3-round" style="margin:8">
+
+  {% block kopfzeile %}
+  <div class="w3-container w3-theme-l4 w3-padding-16">
+    {% if request.user.is_authenticated %} 
+      <div class="w3-container w3-right"> Hallo, {{ request.user.username }} - <a class="w3-btn w3-round w3-theme-l1" href="{% url 'Nutzerverwaltung:MeinProfil' %}">Profil</a> <a class="w3-btn w3-round w3-theme-l1" href="{% url 'Nutzerverwaltung:logout' %}">abmelden</a> </div> 
+    {% else %}
+      <div class="w3-container w3-right"> <a class="w3-btn w3-round w3-theme-l1" href="{% url 'Nutzerverwaltung:login' %}">anmelden</a> <a class="w3-btn w3-round w3-theme-l1" href="{% url 'Nutzerverwaltung:register' %}">registrieren</a> </div> 
+    {% endif %}
+    <h2> <a href="/"><i class="fa fa-home w3-margin-8 w3-hover-text-theme"></i></a> Dies ist die Kopfzeile </h2>
+  </div>
+  {% endblock %}
+  
+  {% block mittelteil %}  
+  <div class="w3-row-padding">
+    <div class="w3-col" style="width:15%">
+      <p>...Hier<br>stehen<br>später<br>diverse<br>Links:</p>
+      <a href="{% url 'Margarete:index' %}">Startseite WettbewerbsDB</a><br>
+      <a href="{% url 'Notizzettel:index' %}">Gästebuch</a>
+    </div>
+    <div class="w3-rest w3-padding-8"><div class="w3-card-4 w3-theme-l4 w3-margin-4 w3-round"><div class="w3-margin-8 w3-padding-8" style="margin:12">
+      {% block content %} Inhalt {% endblock %}
+    </div></div></div>
+  </div>
+  {% endblock %}  
+  
+  <div class="w3-container w3-theme-l4 w3-padding-16">
+  {% block fusszeile %}
+    <p> Das ist die Fußzeile - hier kommt das Impressum und eine laaange Liste der Sponsoren hin </p>
+  {% endblock %}
+  </div>
+
+</div>
+{% endblock %}
+</body>

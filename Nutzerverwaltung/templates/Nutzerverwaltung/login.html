@@ -1,0 +1,47 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'Nutzerverwaltung:login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td style="color:black;">{{ form.username.label_tag }}</td>
+    <td style="color:black;">{{ form.username }}</td>
+</tr>
+<tr>
+    <td style="color:black;">{{ form.password.label_tag }}</td>
+    <td style="color:black;">{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+
+{% if not next %}
+  {% if request.user.pk == 3 %}
+    <input type="hidden" name="next" value="{% url 'Margarete:index' %}" />  
+  {% else %}
+    <input type="hidden" name="next" value="{% url 'Nutzerverwaltung:MeinProfil' %}" />
+  {% endif %}
+{% else %}
+  <input type="hidden" name="next" value="{{ next }}" />
+{% endif %}  
+
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf <p><a href="{% url 'Nutzerverwaltung:password_reset' %}">Lost password?</a></p> #}
+
+{% endblock %}

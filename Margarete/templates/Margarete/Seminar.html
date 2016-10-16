@@ -1,0 +1,23 @@
+{% extends "Grundgeruest/Basistemplate.html" %}
+{% block content %}
+
+<h1> Das ist die Seite der {{ Seminar.bezeichnung }} </h1>
+
+{% if Seminar.fachbereich %}Fachbereich: <a href="{% url 'Margarete:Fachbereich' Seminar.fachbereich.urlbezeichnung %}">{{ Seminar.fachbereich.bezeichnung }}</a>{% endif %}
+
+{% if Seminar.beschreibung %}
+<p>Beschreibung: {{ Seminar.beschreibung }} </p>
+{% endif %}
+{% lorem 2 p random %}
+
+{% if Seminar.konkretesseminar_set.all %}
+Das Seminar hat bereits stattgefunden
+{% endif %}
+{% for sem in Seminar.konkretesseminar_set.all %}
+	<li><a href="{% url 'Margarete:Veranstaltung' sem.urlbezeichnung %}">{{ sem.bezeichnung }}</a></li>
+{% endfor %}
+
+{% endblock %}
+{% block fusszeile %} 
+Das ist die Veranstaltungs-Füßzeile 
+{% endblock %}
