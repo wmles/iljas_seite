@@ -1,0 +1,9 @@
+
+Dieser Ordner ist das eigentliche django-Projekt, der übergeordnete Ordner ist eine Kopie dessen, was zur Seite auf dem Server gehört. Er wird zum backupen vom Server gezogen und von ihm wird auf den Server geschrieben. 
+Zum erstellen weiterer Kopien des Projektes andere Vorgehensweise:
+
+ - erstelle virtualenv für python: virtualenv env_name
+ - aktiviere virtualenv: source env_name/bin/activate
+ - dann pip install -r requirements.txt
+ - per git clone diesen Ordner kopieren
+
