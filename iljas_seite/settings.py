@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6zc4m%rpene@ap$o$_96a$c1sv+5i@n*dwd,hu&4nkw*j35(!qd'
+SECRET_KEY = 'Bj2xWrm17N7apg6vH460mqMw8zfHEFrm0gDbfym7FBEDgdFUwXHEvip2u8JXBny66MT97Cv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['neu.piokg.de']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.neu.piokg.de']
 
 
 # Application definition
@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # wenn was in local_settings steht, wird der hier dafuer angegebene default-Wert ueberschrieben
 try:
