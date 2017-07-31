@@ -32,7 +32,7 @@ class ArtTeilnahme(ggg):
 class Teilnahmekonzept(ggg):
     '''z.B.: 1.,2.,3. Preis, Medallien, Anerkennungspreis, Teilnahme, Korrektor, Betreuer'''
     teilnahmearten = models.ManyToManyField(ArtTeilnahme)
-	#self.delattr('beschreibung')
+    #self.delattr('beschreibung')
 
 class Person(ggg):
     '''z.B. Margarete, Max'''

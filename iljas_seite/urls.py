@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^Olymp/', include('Margarete.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^wmls/', include('Notizzettel.urls')),
+    url(r'^spam/', include('Notizzettel.urls')),
 ]
